@@ -95,7 +95,7 @@ export default function Home() {
               <p className='md:text-lg text-16px'>Sudah sejauh mana kamu kenal Aksara Batak?
                 Uji seberapa jago kamu dan kumpulkan skor tertinggi.
               </p>
-              <button className='bg-[#333333] py-2.5 w-full font-medium roundd-xs md:text-lg text-[16px] cursor-pointer'>Ikuti Kuis Sekarang</button>
+              <a href='/quiz' className='bg-[#333333] py-2.5 w-full font-medium roundd-xs md:text-lg text-[16px] cursor-pointer'>Ikuti Kuis Sekarang</a>
             </div>
           </div>
       </div>

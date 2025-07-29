@@ -23,13 +23,13 @@ export default function Navbar() {
                 <Link className='hover:text-[#640101]'>Belajar Aksara</Link>
               </li>
               <li>
-                <Link to={"/kuis"} className='hover:text-[#640101]'>Kuis</Link>
+                <Link to={"/Quiz"} className='hover:text-[#640101]'>Quiz</Link>
               </li>
               <li>
                 <Link className='hover:text-[#640101]'>Tentang</Link>
               </li>
             </ul>
-            <button className='bg-[#333333] text-white font-medium lg:text-lg md:flex hidden md:text-[14px] sm:text-[12px] text-[10px] lg:px-3.5 px-2 py-2.5 rounded-xs cursor-pointer hover:bg-[#640101]'>Mulai Belajar</button>
+            <button className='bg-[#333333] text-white font-medium  lg:px-3.5 px-2 py-2.5 rounded-xs cursor-pointer hover:bg-[#640101]'>Mulai Belajar</button>
           </div>
 
         </div>
