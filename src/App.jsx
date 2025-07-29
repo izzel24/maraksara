@@ -1,11 +1,11 @@
+import Home from "./pages/Home"
+import AppRoutes from "./routes/AppRoutes"
 
 
 function App() {
 
   return (
-    <>
-      <div className="text-8xl"></div>
-    </>
+      <AppRoutes />
   )
 }
 
