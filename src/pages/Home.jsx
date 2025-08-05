@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import Navbar from '../components/Navbar'
 import backgroundAksara from '../assets/background-image.png'
 import backgroundKuis from '../assets/background-hero.png'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import { IoIosArrowRoundForward } from 'react-icons/io'
 import { axiosInstance } from '../libs/axios'
 import LoadingGif from '../assets/Loading.gif'
@@ -12,6 +12,7 @@ export default function Home() {
 
   const [dialect, setDialect] = useState("toba")
   const [aksara, setAksara] = useState([])
+  const navigate = useNavigate()
 
   const getAksara = async(data="toba") => {
     try {
@@ -38,7 +39,7 @@ export default function Home() {
               <div className='flex flex-col gap-5'>
                 <h1 className='text-white font-inter text-6xl font-bold'>Kenali & Lestarikan Aksara Batak</h1>    
                 <p className='text-white font-inter text-lg'>Aksara Batak adalah sistem tulisan tradisional masyarakat Batak. Mari kita pelajari dan lestarikan bersama</p>        
-                <button className='bg-[#333333] py-3 px-5 md:max-w-[250px] w-full font-medium2 text-white text-xl rounded-xs cursor-pointer hover:bg-[#474747]'>Mulai Belajar</button>    
+                <button className='bg-[#333333] py-3 px-5 md:max-w-[250px] w-full font-medium2 text-white text-xl rounded-xs cursor-pointer hover:bg-[#474747]' onClick={() => navigate('/belajar-aksara')}>Mulai Belajar</button>    
               </div>
             </div>
           </div>
@@ -47,8 +48,8 @@ export default function Home() {
         <div className='flex flex-col sm:gap-6 gap-3'>
           <h1 className='font-inter font-bold sm:text-5xl text-2xl'>Sejarah Aksara Batak</h1>
           <div className='flex flex-col sm:gap-3.5 gap-2 font-inter'>
-            <p className=' sm:text-2xl text-[16px]'>Aksara Batak merupakan salah satu aksara tradisional Nusantara yang digunakan oleh masyarakat Batak di Sumatera Utara. Aksara ini diperkirakan berkembang sejak abad ke-18 atau lebih awal, sebagai turunan dari aksara India Selatan, khususnya aksara Pallawa, yang juga memengaruhi perkembangan aksara Jawa Kuno, Kawi, Bugis, dan Rejang.</p>
-            <Link to={"#"}  className='flex items-center sm:text-[20px] text-[16px] font-bold'>Baca lebih lanjut <IoIosArrowRoundForward className='sm:text-[30px] text-[26px]  ' /></Link>
+            <p className=' sm:text-lg text-[16px]'>Aksara Batak adalah salah satu sistem tulisan tradisional Nusantara yang berasal dari wilayah Sumatera Utara. Aksara ini digunakan oleh berbagai subsuku Batak seperti Toba, Karo, Mandailing, Pakpak, Angkola, dan Simalungun. Meskipun memiliki beberapa perbedaan dalam bentuk dan pelafalan, seluruhnya masih berada dalam satu rumpun sistem penulisan.</p>
+            <Link to={"/belajar-aksara#sejarah"}  className='flex items-center sm:text-[20px] text-[16px] font-bold'>Baca lebih lanjut <IoIosArrowRoundForward className='sm:text-[30px] text-[26px]  ' /></Link>
           </div>
         </div>
       </div>
@@ -85,7 +86,7 @@ export default function Home() {
           }
         </div>
         <div className='flex w-full items-center py-5 justify-end'>
-          <Link to={"#"} className='flex font-inter m:text-[20px] text-[16px] items-center font-bold'>Lihat Selengkapanya <IoIosArrowRoundForward className='sm:text-[30px] text-[26px]' /></Link> 
+          <Link to={"/belajar-aksara#huruf-dasar"} className='flex font-inter m:text-[20px] text-[16px] items-center font-bold'>Lihat Selengkapanya <IoIosArrowRoundForward className='sm:text-[30px] text-[26px]' /></Link> 
         </div>
       </div>
       <div id='kuis-section' className='h-[450px]'>
@@ -99,12 +100,12 @@ export default function Home() {
             </div>
           </div>
       </div>
-      <div id='tentang-section' className='sm:px-20 px-10 py-20 flex'>
-        <div className='flex flex-col font-inter sm:gap-10 gap-5'>
-          <h1 className='font-bold sm:text-5xl text-2xl'>Tentang</h1>
-          <div className='flex flex-col sm:gap-8 gap-3'>
-            <p className='sm:text-2xl text-[16px]'>MARAKSARA.ID hadir sebagai media pembelajaran digital untuk memperkenalkan, melestarikan, dan memudahkan siapa saja yang ingin mempelajari Aksara Batak. Kami percaya, Aksara Batak bukan sekedar simbol, tetapi juga identitas budaya yang patut dijaga dan diwariskan kepada generasi mendatang.</p>
-            <p className='sm:text-2xl text-[16px]'>Visi kami adalah menjadikan Aksara Batak sebagai bagian dari kehidupan sehari-hari, bukan hanya sebagai warisan di museum atau buku sejarah. Melalui teknologi, kita bisa belajar dan merawat budaya di mana pun dan kapan pun, tanpa batasan ruang dan waktu.</p>
+      <div id='tentang-section' className='sm:px-20 px-10 py-20 flex min-h-[600px]'>
+        <div className='flex flex-col font-inter sm:gap-2 gap-2'>
+          <h1 className='font-bold sm:text-3xl text-2xl'>Tentang</h1>
+          <div className='flex flex-col sm:gap-2 gap-2'>
+            <p className='sm:text-lg text-[16px]'>MARAKSARA.ID hadir sebagai media pembelajaran digital untuk memperkenalkan, melestarikan, dan memudahkan siapa saja yang ingin mempelajari Aksara Batak. Kami percaya, Aksara Batak bukan sekedar simbol, tetapi juga identitas budaya yang patut dijaga dan diwariskan kepada generasi mendatang.</p>
+            <p className='sm:text-lg text-[16px]'>Visi kami adalah menjadikan Aksara Batak sebagai bagian dari kehidupan sehari-hari, bukan hanya sebagai warisan di museum atau buku sejarah. Melalui teknologi, kita bisa belajar dan merawat budaya di mana pun dan kapan pun, tanpa batasan ruang dan waktu.</p>
           </div>
         
         </div>

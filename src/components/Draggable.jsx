@@ -8,15 +8,15 @@ export default function Draggable(props) {
     });
     const style = {
         transform: CSS.Translate.toString(transform),
-        padding: '10px 20px',
-        background: 'lightblue',
+        padding: '10px 30px',
+        background: '#640101',
         cursor: 'grab',
-        marginBottom: '10px',
+        color: 'white',
     };
 
     return (
-        <button className='max-w-[250px]' ref={setNodeRef} style={style} {...listeners} {...attributes}>
+        <div className='flex justify-center items-center font-inter' ref={setNodeRef} style={style} {...listeners} {...attributes}>
           {props.name}
-        </button>
+        </div>
     );
 }
