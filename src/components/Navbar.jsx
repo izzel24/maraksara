@@ -47,7 +47,7 @@ export default function Navbar() {
               <Link to={'/belajar-aksara'} className='hover:text-[#640101]'>Belajar Aksara</Link>
             </li>
             <li>
-              <Link to={'/quiz'} className='hover:text-[#640101]'>Kuis</Link>
+              <Link to={'/quiz'} className='hover:text-[#640101]'>Quiz</Link>
             </li>
             <li>
               <Link to={'/tentang'} className='hover:text-[#640101]'>Tentang</Link>

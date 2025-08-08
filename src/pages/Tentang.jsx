@@ -6,7 +6,7 @@ export default function Tentang() {
   return (
     <>
       <Navbar />
-      <div className='h-screen pt-[90px] sm:px-20 px-10 flex flex-col gap-5  font-inter'>
+      <div className='min-h-screen pt-[90px] sm:px-20 px-10 flex flex-col gap-5  font-inter py-10'>
         <h1 className='text-3xl font-bold'>Tentang</h1>
         <div className='flex flex-col gap-2'>
           <p className='sm:text-xl text-lg'>MARAKSARA.ID adalah sebuah situs web yang didedikasikan untuk mengajarkan dan melestarikan aksara Batak. Kami meyakini bahwa aksara Batak bukan sekadar kumpulan simbol, melainkan representasi dari identitas dan budaya yang patut dijaga serta diwariskan kepada generasi mendatang.</p>
