@@ -29,7 +29,7 @@ export default function Navbar() {
                 <Link to={"/quiz"} className={`hover:text-[#640101] ${currentPathName === "/quiz" && "text-[#640101]"}`}>Quiz</Link>
               </li>
               <li>
-                <Link className='hover:text-[#640101]'>Tentang</Link>
+                <Link to={"/tentang"} className={`hover:text-[#640101] ${currentPathName === "/tentang" && "text-[#640101]"}`}>Tentang</Link>
               </li>
             </ul>
             <button className='bg-[#333333] text-white font-medium  lg:px-3.5 px-2 py-2.5 rounded-xs cursor-pointer hover:bg-[#640101]' onClick={()=>navigate("/belajar-aksara")}>Mulai Belajar</button>
@@ -50,7 +50,7 @@ export default function Navbar() {
               <Link to={'/quiz'} className='hover:text-[#640101]'>Kuis</Link>
             </li>
             <li>
-              <Link className='hover:text-[#640101]'>Tentang</Link>
+              <Link to={'/tentang'} className='hover:text-[#640101]'>Tentang</Link>
             </li>
           </ul>
           </div>

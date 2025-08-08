@@ -49,8 +49,9 @@ export default function QuizResult() {
         
           <div className='w-full flex flex-col gap-2'>
             {details.map((item,index)=>{
+               const correct = parseInt(item.is_correct)
               return(
-                <details key={index} className={`w-full p-4 shadow-s rounded-xs hover:cursor-pointer ${item.is_correct ? "bg-green-100" : "bg-red-100" }`}>
+                <details key={index} className={`w-full p-4 shadow-s rounded-xs hover:cursor-pointer ${correct ? "bg-green-50" : "bg-red-50" }`}>
                   <summary>{item.question}</summary>
                   <ul className='mt-2'>
                     <li>Jawaban anda: {item.correct_answer}</li>

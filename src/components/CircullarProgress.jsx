@@ -13,7 +13,7 @@ export const CircularProgress = ({ score }) => {
                 className='rotate-[-90deg]'
             >
                 <circle
-                    stroke="#d1fae5" 
+                    stroke="#DFDFDF" 
                     fill="transparent"
                     strokeWidth={stroke}
                     r={normalizedRadius}
@@ -21,7 +21,7 @@ export const CircularProgress = ({ score }) => {
                     cy={radius}
                 />
                 <circle
-                    stroke="#22c55e" 
+                    stroke="#6AA07E" 
                     fill="transparent"
                     strokeWidth={stroke}
                     strokeLinecap="round"

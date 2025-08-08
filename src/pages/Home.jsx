@@ -7,6 +7,7 @@ import { IoIosArrowRoundForward } from 'react-icons/io'
 import { axiosInstance } from '../libs/axios'
 import LoadingGif from '../assets/Loading.gif'
 import Footer from '../components/Footer'
+import backgroundTes from '../assets/background-home.jpg'
 
 export default function Home() {
 
@@ -26,6 +27,20 @@ export default function Home() {
     }
   } 
 
+    const startQuiz = async () => {
+      try {
+        const response = await axiosInstance.post('/quiz/start');
+        console.log(response)
+        const token = response.data.session.token;
+        console.log(token)
+        localStorage.setItem("session_token", token)
+        navigate("/quiz/start")
+      } catch (error) {
+        console.log(error)
+      }
+     
+    }
+
   useEffect(() =>{
     getAksara()
   }, []);
@@ -33,12 +48,14 @@ export default function Home() {
   return (
     <>
       <Navbar />
-      <div id='hero-section' className='bg-opacity-0 h-screen min-h-[500px]' style={{backgroundImage:`url(${backgroundAksara})` }}>
-        <div className={` h-full pt-[90px]  bg-[color:hsl(0,97%,20%,95%)]`}>
+      <div id='hero-section' className=' h-screen min-h-[500px] bg-cover bg-top' style={{backgroundImage:`url(${backgroundTes})` }}>
+        <div className={` h-full pt-[90px]  bg-[color:hsl(0,97%,20%,45%)]`}>
             <div className='lg:w-[70%] lg:min-w-[800px] w-full flex items-center h-full lg:px-52 sm:px-20 px-10'>
               <div className='flex flex-col gap-5'>
-                <h1 className='text-white font-inter text-6xl font-bold'>Kenali & Lestarikan Aksara Batak</h1>    
-                <p className='text-white font-inter text-lg'>Aksara Batak adalah sistem tulisan tradisional masyarakat Batak. Mari kita pelajari dan lestarikan bersama</p>        
+                <div className='flex flex-col gap-1'>
+                  <h1 className='text-white font-inter text-6xl font-bold'>Kenali & Lestarikan Aksara Batak</h1>
+                  <p className='text-white font-inter text-lg'>Aksara Batak adalah sistem tulisan tradisional masyarakat Batak. Mari kita pelajari dan lestarikan bersama</p>        
+                </div>
                 <button className='bg-[#333333] py-3 px-5 md:max-w-[250px] w-full font-medium2 text-white text-xl rounded-xs cursor-pointer hover:bg-[#474747]' onClick={() => navigate('/belajar-aksara')}>Mulai Belajar</button>    
               </div>
             </div>
@@ -48,7 +65,7 @@ export default function Home() {
         <div className='flex flex-col sm:gap-6 gap-3'>
           <h1 className='font-inter font-bold sm:text-5xl text-2xl'>Sejarah Aksara Batak</h1>
           <div className='flex flex-col sm:gap-3.5 gap-2 font-inter'>
-            <p className=' sm:text-lg text-[16px]'>Aksara Batak adalah salah satu sistem tulisan tradisional Nusantara yang berasal dari wilayah Sumatera Utara. Aksara ini digunakan oleh berbagai subsuku Batak seperti Toba, Karo, Mandailing, Pakpak, Angkola, dan Simalungun. Meskipun memiliki beberapa perbedaan dalam bentuk dan pelafalan, seluruhnya masih berada dalam satu rumpun sistem penulisan.</p>
+            <p className=' sm:text-xl text-lg'>Aksara Batak adalah salah satu sistem tulisan tradisional Nusantara yang berasal dari wilayah Sumatera Utara. Aksara ini digunakan oleh berbagai subsuku Batak seperti Toba, Karo, Mandailing, Pakpak, Angkola, dan Simalungun. Meskipun memiliki beberapa perbedaan dalam bentuk dan pelafalan, seluruhnya masih berada dalam satu rumpun sistem penulisan.</p>
             <Link to={"/belajar-aksara#sejarah"}  className='flex items-center sm:text-[20px] text-[16px] font-bold'>Baca lebih lanjut <IoIosArrowRoundForward className='sm:text-[30px] text-[26px]  ' /></Link>
           </div>
         </div>
@@ -92,20 +109,22 @@ export default function Home() {
       <div id='kuis-section' className='h-[450px]'>
           <div className='h-full w-full bg-size-[60%] flex justify-center items-center text-center' style={{backgroundImage:`url(${backgroundKuis})`}}>
             <div className='flex flex-col justify-center items-center text-white font-inter max-w-[500px] p-4 gap-5'>
-              <h1 className='font-bold md:text-[40px] text-3xl'>TES PENGETAHUANMU!</h1>
+            <h1 className='font-bold md:text-[40px] text-3xl'>Tes Pengetahuanmu!</h1>
               <p className='md:text-lg text-16px'>Sudah sejauh mana kamu kenal Aksara Batak?
                 Uji seberapa jago kamu dan kumpulkan skor tertinggi.
               </p>
-              <a href='/quiz' className='bg-[#333333] py-2.5 w-full font-medium roundd-xs md:text-lg text-[16px] cursor-pointer'>Ikuti Kuis Sekarang</a>
+            <button className='bg-[#333333] py-2.5 w-full font-medium roundd-xs md:text-lg text-[16px] cursor-pointer hover:bg-[#474747]' onClick={() => startQuiz()}>Ikuti Quiz Sekarang</button>
             </div>
           </div>
       </div>
-      <div id='tentang-section' className='sm:px-20 px-10 py-20 flex min-h-[600px]'>
-        <div className='flex flex-col font-inter sm:gap-2 gap-2'>
+      <div id='tentang-section' className='sm:px-20 px-10 py-20 flex'>
+        <div className='flex flex-col font-inter sm:gap-5 gap-2'>
           <h1 className='font-bold sm:text-3xl text-2xl'>Tentang</h1>
           <div className='flex flex-col sm:gap-2 gap-2'>
-            <p className='sm:text-lg text-[16px]'>MARAKSARA.ID hadir sebagai media pembelajaran digital untuk memperkenalkan, melestarikan, dan memudahkan siapa saja yang ingin mempelajari Aksara Batak. Kami percaya, Aksara Batak bukan sekedar simbol, tetapi juga identitas budaya yang patut dijaga dan diwariskan kepada generasi mendatang.</p>
-            <p className='sm:text-lg text-[16px]'>Visi kami adalah menjadikan Aksara Batak sebagai bagian dari kehidupan sehari-hari, bukan hanya sebagai warisan di museum atau buku sejarah. Melalui teknologi, kita bisa belajar dan merawat budaya di mana pun dan kapan pun, tanpa batasan ruang dan waktu.</p>
+            <p className='sm:text-xl text-lg'>MARAKSARA.ID adalah sebuah situs web yang didedikasikan untuk mengajarkan dan melestarikan aksara Batak. Kami meyakini bahwa aksara Batak bukan sekadar kumpulan simbol, melainkan representasi dari identitas dan budaya yang patut dijaga serta diwariskan kepada generasi mendatang.</p>
+            <p className='sm:text-xl text-lg'>Tujuan kami adalah menghadirkan aksara Batak sebagai bagian dari kehidupan sehari-hari, bukan hanya sebagai peninggalan sejarah, tetapi sebagai unsur budaya yang hidup dan bisa dipelajari serta dimanfaatkan melalui teknologi. Dengan MARAKSARA.ID, siapa pun dapat belajar kapan saja dan di mana saja tanpa batasan waktu dan tempat.</p>
+            <p className='sm:text-xl text-lg'>Saat ini, fitur yang tersedia mencakup pengenalan dasar karakter aksara dan kuis latihan membaca. Kami menyadari bahwa ini baru merupakan langkah awal dari perjalanan yang panjang.</p>
+            <p className='sm:text-xl text-lg'>Ke depannya, kami berharap dapat menambah berbagai fitur interaktif dan edukatif yang lebih memudahkan pengguna dalam memahami dan mengaplikasikan Aksara Batak secara menyenangkan dan bermakna.</p>
           </div>
         
         </div>

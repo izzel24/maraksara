@@ -4,12 +4,30 @@ import Navbar from '../components/navbar'
 import Footer from '../components/Footer'
 import { axiosInstance } from '../libs/axios'
 import LoadingGif from '../assets/Loading.gif'
+import { IoIosCheckmark } from 'react-icons/io'
 
 export default function BelajarAksara() {
 
   const [dialect, setDialect] = useState('toba')
   const [aksara, setAksara] = useState([])
   const [links, setLinks] = useState([])
+  const [diacritics, setDiacritics] = useState([])
+
+  const [isAnswer1Correct, setIsAnswer1Correct] = useState()
+  const [input1, setInput1] = useState()
+
+  const [isAnswer2Correct, setIsAnswer2Correct] = useState()
+  const [input2, setInput2] = useState()
+
+  const [isAnswer3Correct, setIsAnswer3Correct] = useState()
+  const [input3, setInput3] = useState()
+
+
+  const [isAnswer4Correct, setIsAnswer4Correct] = useState()
+  const [input4, setInput4] = useState()
+
+  const [isAnswer5Correct, setIsAnswer5Correct] = useState()
+  const [input5, setInput5] = useState()
 
   const getAksara = async(data="toba") => {
     setDialect(data)
@@ -36,8 +54,19 @@ export default function BelajarAksara() {
     }
   }
 
+  const getDiacritics = async () => {
+    try {
+      const response = await axiosInstance.get('/diacritics')
+      console.log(response)
+      setDiacritics(response.data)
+    } catch (error) {
+      console.log(error)
+    }
+  }
+
   useEffect(() => {
     getAksara()
+    getDiacritics()
   }, [])
 
 
@@ -100,6 +129,84 @@ export default function BelajarAksara() {
           </li>
           <li>
             <h1 className='font-semibold text-2xl mb-5'>Vokal & Diakritik</h1>
+            <div className='grid lg:grid-cols-4 md:grid-cols-3 grid-cols-2 w-full h-full gap-10'>
+            {diacritics.map((item,index) => {
+              return(
+                <div
+                  key={index}
+                  className='aspect-square shadow-s rounded-sm flex flex-col justify-between items-center p-4'
+                >
+                  <div className='flex-grow flex items-center justify-center'>
+                    <h1 className='font-aksara lg:text-7xl md:text-6xl text-4xl select-none'>{item.symbol}</h1>
+                  </div>
+                  <div className='text-center mt-2'>
+                    <p className='font-inter lg:text-lg md:text-base text-sm'>{item.latin_translit ? item.latin_translit : item.type}</p>
+                    <p className='font-inter lg:text-lg md:text-base text-sm'>{item.example}</p>
+                  </div>
+                </div>
+              )
+            })}
+            </div>
+          </li>
+          {/* <li>
+            <h1 className='font-semibold text-2xl mb-5'>Gabungan Kata</h1>
+          </li> */}
+          <li className='h-screen'> 
+            <h1 className='font-semibold text-2xl mb-5'>Latihan</h1>
+            <div className='grid sm:grid-cols-2 lg:grid-cols-3 grid-cols-1 gap-4'>
+              <div className='aspect-video shadow-s rounded-xs flex flex-col items-center justify-center p-5'>
+                <div className='font-aksara h-[80%] flex items-center text-4xl'>ᯀ + ᯖ?</div>
+                <p className={`${isAnswer1Correct ? "text-green-300" : "text-red-300"}`}>{isAnswer1Correct === true && "benar"} {isAnswer1Correct === false && "salah"}</p>
+                <div className='flex items-center gap-2'>
+                  <input type="text" className='border-1 p-1 rounded-xs text-sm' placeholder='jawab' onChange={(e) => setInput1(e.target.value)} value={input1} />
+                  <button className='bg-[#333333] rounded-xs'><IoIosCheckmark size={30} className='text-white cursor-pointer' onClick={() => (input1 == "ata" ? setIsAnswer1Correct(true) : setIsAnswer1Correct(false) )} /></button>
+                </div>
+              </div>
+              <div className='aspect-video shadow-s rounded-xs flex flex-col items-center justify-center p-5'>
+                <div className='font-aksara h-[80%] flex items-center text-4xl'>ᯖ + ᯠ?</div>
+                <p className={`${isAnswer2Correct ? "text-green-300" : "text-red-300"}`}>{isAnswer2Correct === true && "benar"} {isAnswer2Correct === false && "salah"}</p>
+                <div className='flex items-center gap-2'>
+                  <input type="text" className='border-1 p-1 rounded-xs text-sm' placeholder='jawab' onChange={(e) => setInput2(e.target.value) } />
+                  <button className='bg-[#333333] rounded-xs'><IoIosCheckmark size={30} className='text-white' onClick={() => (input2 == "tanya" ? setIsAnswer2Correct(true) : setIsAnswer2Correct(false))} /></button>
+                </div>
+              </div>
+              <div className='aspect-video shadow-s rounded-xs flex flex-col items-center justify-center p-5'>
+                <div className='font-aksara h-[70%] flex flex-col justify-center items-center text-4xl'> 
+                  <p>ᯖ + ᯄ᯦ +  ᯲?</p>
+                </div>
+                <div className='h-[10%]'>
+                  <p className={`${isAnswer3Correct ? "text-green-300" : "text-red-300"}`}>{isAnswer3Correct === true && "benar"} {isAnswer3Correct === false && "salah"}</p>
+                </div>
+                <div className='flex items-center gap-2'>
+                  <input type="text" className='border-1 p-1 rounded-xs text-sm' placeholder='jawab' onChange={(e) => setInput3(e.target.value)} />
+                  <button className='bg-[#333333] rounded-xs cursor-pointer'><IoIosCheckmark size={30} className='text-white' onClick={() => (input3 == "tak" ? setIsAnswer3Correct(true) : setIsAnswer3Correct(false))} /></button>
+                </div>
+              </div>
+              <div className='aspect-video shadow-s rounded-xs flex flex-col items-center justify-center p-5'>
+                <div className='font-aksara h-[70%] flex flex-col justify-center items-center text-4xl'> 
+                  <p>ᯏ + ᯓ?</p>
+                </div>
+                <div className='h-[10%]'>
+                  <p className={`${isAnswer4Correct ? "text-green-300" : "text-red-300"}`}>{isAnswer4Correct === true && "benar"} {isAnswer4Correct === false && "salah"}</p>
+                </div>
+                <div className='flex items-center gap-2'>
+                  <input type="text" className='border-1 p-1 rounded-xs text-sm' placeholder='jawab' onChange={(e) => setInput4(e.target.value)} />
+                  <button className='bg-[#333333] rounded-xs cursor-pointer'><IoIosCheckmark size={30} className='text-white' onClick={() => (input4 == "gara" ? setIsAnswer4Correct(true) : setIsAnswer4Correct(false))} /></button>
+                </div>
+              </div>
+              <div className='aspect-video shadow-s rounded-xs flex flex-col items-center justify-center p-5'>
+                <div className='font-aksara h-[70%] flex flex-col justify-center items-center text-4xl'> 
+                  <p>ᯊ + ᯋ?</p>
+                </div>
+                <div className='h-[10%]'>
+                  <p className={`${isAnswer5Correct ? "text-green-300" : "text-red-300"}`}>{isAnswer5Correct === true && "benar"} {isAnswer5Correct === false && "salah"}</p>
+                </div>
+                <div className='flex items-center gap-2'>
+                  <input type="text" className='border-1 p-1 rounded-xs text-sm' placeholder='jawab' onChange={(e) => setInput5(e.target.value)} />
+                  <button className='bg-[#333333] rounded-xs cursor-pointer'><IoIosCheckmark size={30} className='text-white' onClick={() => (input5 == "nawa" ? setIsAnswer5Correct(true) : setIsAnswer5Correct(false))} /></button>
+                </div>
+              </div>
+            </div>
           </li>
         </ul>
       </div>

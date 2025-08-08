@@ -32,7 +32,7 @@ export default function Footer() {
             
         </div>
         <div className='flex justify-center font-inter text-sm border-t-1 items-center text-center h-[60px] '>
-              <p>© 2025 Maraksara.id - Developed and Design by Henry Frizzel Johanis</p> 
+              <p>© 2025 Maraksara.id - Develope and Design by Henry Frizzel Johanis</p> 
         </div>
     </div>  
   )

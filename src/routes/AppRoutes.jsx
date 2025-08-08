@@ -5,6 +5,7 @@ import Quiz from '../pages/Quiz'
 import QuizStart from '../pages/QuizStart'
 import QuizResult from '../pages/QuizResult'
 import BelajarAksara from '../pages/BelajarAksara'
+import Tentang from '../pages/Tentang'
 
 export default function AppRoutes() {
   return (
@@ -14,6 +15,7 @@ export default function AppRoutes() {
         <Route path='/quiz/start' element={<QuizStart />} />
         <Route path='/quiz/result' element={<QuizResult />} />
         <Route path='/belajar-aksara' element={<BelajarAksara />} />
+        <Route path='/tentang' element={<Tentang />}/>
     </Routes>
   )
 }

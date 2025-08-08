@@ -8,6 +8,15 @@ import { useNavigate } from 'react-router-dom';
 import spinner from '../assets/loading_spinner.gif'
 import { IoIosArrowRoundBack } from 'react-icons/io';
 import Quiz from './Quiz';
+import {
+    Modal,
+    ModalContent,
+    ModalHeader,
+    ModalBody,
+    ModalFooter,
+    Button,
+} from "@heroui/react";
+import { Dialog } from '@headlessui/react';
 
 export default function QuizStart() {
 
@@ -28,6 +37,8 @@ export default function QuizStart() {
     const sensors = useSensors(mouseSensor, touchSensor)
 
     const navigate = useNavigate();
+    const [isOpen, setIsOpen] = useState(false);
+
 
     const getQuestion = async () => {
 
@@ -160,10 +171,41 @@ export default function QuizStart() {
             <div className='min-h-screen h-screen font-inter px-5 py-10 overflow-hidden'>
                 <div className='flex flex-col h-full gap-4'>
                     <ProggressBar current={questionNumber} total={5} />
-                <button className='flex items-center cursor-pointer' onClick={()=>back()}> 
+                <button className='flex items-center self-start cursor-pointer' onClick={() => setIsOpen(true)}> 
                     <IoIosArrowRoundBack size={40} />
                     <span>Kembali</span>
                 </button>
+                <Dialog as="div" className="relative z-50" open={isOpen} onClose={() => setIsOpen(false)}>
+                    {/* Background overlay */}
+                    <div className="fixed inset-0 bg-black/30" aria-hidden="true" />
+
+                    {/* Modal wrapper */}
+                    <div className="fixed inset-0 flex items-center justify-center p-4">
+                        <Dialog.Panel className="w-full max-w-md rounded-xs bg-white p-6 shadow-lg">
+                            <Dialog.Title className="text-lg font-medium text-gray-900">
+                                Yakin mau keluar?
+                            </Dialog.Title>
+                            <div className="mt-2 text-sm text-gray-600">
+                                Kalau kamu keluar sekarang, progres kuis kamu akan hilang.
+                            </div>
+
+                            <div className="mt-4 flex justify-end gap-2">
+                                <button
+                                    onClick={() => setIsOpen(false)}
+                                    className="px-4 py-2 text-sm bg-[#333333] hover:bg-[#333333]/90 cursor-pointer text-white"
+                                >
+                                    Batal
+                                </button>
+                                <button
+                                    onClick={back}
+                                    className="px-4 py-2 text-sm bg-[#640101] hover:bg-[#640101]/90 cursor-pointer text-white"
+                                >
+                                    Keluar
+                                </button>
+                            </div>
+                        </Dialog.Panel>
+                    </div>
+                </Dialog>
                     <div className='flex flex-col h-full justify-around'>
                         <div id='question' className='flex flex-col h-[25%] '>
                             <div className='h-full flex items-center justify-center'>
@@ -223,7 +265,7 @@ export default function QuizStart() {
                     </div>
 
                     <div className='flex gap-4 w-full justify-end'>
-                    <button className={`bg-[#333333] flex px-10 py-2.5 text-white cursor-pointer hover:bg-[#474747] ${isLoading && "disabled bg-gray-200"}`} onClick={() => { questionNumber < 5 ? submitQuiz() : finishQuiz() }}>{questionNumber < 5 ? "Next" : "Finish"} {isLoading && <img src={spinner} alt="" width={20} />}</button>
+                    <button className={`bg-[#333333] flex px-10 py-2.5 text-white cursor-pointer hover:bg-[#474747] ${isLoading && "bg-gray-200 hover:bg-gray-200 !cursor-not-allowed"} ${answer == 0 && "bg-gray-200 hover:bg-gray-200 !cursor-not-allowed"}`} disabled={isLoading || answer == 0 ? true : false } onClick={() => { questionNumber < 5 ? submitQuiz() : finishQuiz() }}>{questionNumber < 5 ? "Next" : "Finish"} {isLoading && <img src={spinner} alt="" width={20} />}</button>
                         
                         {/* <button className='bg-[#333333] px-10 py-2.5 text-white cursor-pointer' onClick={() => finishQuiz()}>Finish</button> */}
                     </div>
